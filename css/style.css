@@ -1,0 +1,66 @@
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.map{
+    width: 100;
+    height: 100vh;
+    border-radius: 5px;
+    background:#d1d1d1;
+    display: flex;
+    float: top;
+    justify-content: center;
+}
+
+.control_panel{
+    width: 30%;
+    height: auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: #333;
+    justify-content: right;
+    vertical-align: top
+}
+
+.image{
+    width: 70%;
+    height: auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    color: #333;
+    vertical-align: top
+    
+}
+
+.image h1{
+    font-weight: 500;
+    color: #000;
+}
+
+.image img{
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+label{
+    display: block;
+    width: 200px;
+    background: #e3362c;
+    color:#fff;
+    padding: 12px;
+    margin: 10px auto;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input{
+    display: none;
+}
