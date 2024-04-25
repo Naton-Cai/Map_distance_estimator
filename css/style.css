@@ -5,36 +5,31 @@
 }
 
 .map{
-    width: 100;
-    height: 100vh;
-    border-radius: 5px;
-    background:#d1d1d1;
+    width: 100%;
+    height: 100%;
+    background:#000000;
+    overflow: hidden; 
     display: flex;
-    float: top;
-    justify-content: center;
 }
 
 .control_panel{
-    width: 30%;
-    height: auto;
-    background: #fff;
+    position: absolute;
+    width: 10%;
+    height: 100%;
+    background: #2bbc89;
     padding: 40px;
-    border-radius: 15px;
-    text-align: center;
+    text-align: left;
     color: #333;
-    justify-content: right;
-    vertical-align: top
+    z-index: 10;
 }
 
 .image{
-    width: 70%;
+    min-width: 100%;
     height: auto;
-    background: #fff;
-    padding: 40px;
-    border-radius: 15px;
+    background: rgb(0, 0, 0);
     text-align: center;
     color: #333;
-    vertical-align: top
+    z-index: 0;
     
 }
 
@@ -46,8 +41,7 @@
 .image img{
     width: 100%;
     height: auto;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    cursor: grab;
 }
 
 label{

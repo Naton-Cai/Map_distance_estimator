@@ -12,22 +12,32 @@
         <h1>Travel Map Simulator</h1>        
     </div>
         
-    <div class="map">
+    <div class="map" id="map-container">
         
         <div class = "image">
-            <h1>Map</h1>
-            <img src="images/map_profile.png">
-            <label for="input-file">upload map</label>
-            <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+            <img src="images/map_profile.png" id="map-pic">
         </div>
 
         <div class = "control_panel">
-            <h1>hi</h1>
+            <h1>Control Panel</h1>
+            <label for="input-file">upload map</label>
+            <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
         </div>
     </div>
 
 
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js">
+    </script>
+
+    <script>
+        let profilePic = document.getElementById("map-pic");
+        let inputFile = document.getElementById("input-file");
+
+        inputFile.onchange = function(){
+            profilePic.src = URL.createObjectURL(inputFile.files[0])
+        }
+    </script>
+
 </body>
 </html>
