@@ -1,10 +1,17 @@
 
 :root {
     color-scheme: light dark;
-    --light-bg: tomato;
-    --dark-bg: slategray;
+    --light-bg: whitesmoke;
+    --dark-bg: darkslategray;
 }
-
+.body {
+    background-color: snow;
+}
+@media (prefers-color-scheme: dark) {
+    .body{
+        background: darkslategray;
+    }
+}
 .title{
     display: flex;
     align-items: center;
@@ -61,6 +68,11 @@ label{
     margin: 9px auto;
     border-radius: 16px;
     cursor: pointer;
+}
+@media (prefers-color-scheme: dark) {
+    label{
+        background: plum;
+    }
 }
 
 input{
