@@ -1,21 +1,16 @@
 
 :root {
     color-scheme: light dark;
-    --light-bg: whitesmoke;
-    --dark-bg: darkslategray;
 }
-.body {
-    background-color: snow;
+body {
+    background-color: light-dark(#FAF9F6, #212121);
 }
-@media (prefers-color-scheme: dark) {
-    .body{
-        background: darkslategray;
-    }
-}
+
 .title{
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
+    color: light-dark(#212121, #FAF9F6)
 }
 
 .map{
@@ -28,14 +23,30 @@
 
 .control_panel{
     position: absolute;
-    width: 10%;
-    height: 100%;
-    background: #2bbc89;
+    width: 20%;
+    height: fit-content;
+    text-align: center;
+    background: rgba(188, 188, 188, 0.50);
+    backdrop-filter: blur(4px);
     padding: 40px;
-    text-align: left;
-    color: #333;
+    text-align: center;
+    color: #111;
     border-radius: 16px;
     z-index: 10;
+}
+
+label{
+    display: block;
+    width: 50%;
+    height: fit-content;
+    background: light-dark(#e3362c, #C8A2C8);
+    color: light-dark(#fff, #000);
+    text-align: center;
+    padding: 12px;
+    
+    margin: 9px auto;
+    border-radius: 16px;
+    cursor: pointer;
 }
 
 .image{
@@ -59,21 +70,6 @@
     cursor: grab;
 }
 
-label{
-    display: block;
-    width: 200px;
-    background: #e3362c;
-    color:#fff;
-    padding: 12px;
-    margin: 9px auto;
-    border-radius: 16px;
-    cursor: pointer;
-}
-@media (prefers-color-scheme: dark) {
-    label{
-        background: plum;
-    }
-}
 
 input{
     display: none;
