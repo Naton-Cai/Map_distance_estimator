@@ -1,21 +1,37 @@
 const image = document.getElementById('map-pic');
 const container = document.getElementById('map-container');
+
+let rectimage = image.getBoundingClientRect()
 let isDragging = false;
 let startX, startY;
 let translateX = 0, translateY = 0;
 let scale = 1;
+let profilePic = document.getElementById("map-pic");
+let inputFile = document.getElementById("input-file");
 
 image.addEventListener('mousedown', startDrag);
 document.addEventListener('mouseup', endDrag);
 image.addEventListener('mousemove', drag);
 image.addEventListener('wheel', zoom);
+document.addEventListener('keyup', statuscheck);
 document.getElementById('map-pic').setAttribute('draggable', false);
+
+
+inputFile.onchange = function(){
+    profilePic.src = URL.createObjectURL(inputFile.files[0])
+    rectimage = image.getBoundingClientRect()
+}
+
+function statuscheck() {
+    console.log(translateX, translateY)
+}
 
 function startDrag(e) {
     isDragging = true;
     startX = e.clientX - translateX;
     startY = e.clientY - translateY;
     image.style.cursor = 'grabbing';
+ 
 }
 
 function endDrag() {
@@ -32,12 +48,23 @@ function drag(e) {
 
 function zoom(e) {
     e.preventDefault();
-    scale += e.deltaY * -0.001;
-    console.log(scale)
-    scale = Math.min(Math.max(0.1, scale), 3); // limit scale
+    var oldscale = scale 
+    scale += (e.deltaY * -0.001*scale);
+    scale = Math.min(Math.max(0.1, scale), 10); // limit scale
+
+    //console.log(oldscale, scale, rectimage.width, rectimage.height)
+    if (scale != oldscale)
+    { 
+        translateX += e.deltaY * -0.001*translateX;    // find center of first image
+        translateY += e.deltaY * -0.001*translateY;
+    }
+
     updateImageTransform();
-}
+
+}   
 
 function updateImageTransform() {
+    translateX = Math.min(Math.max(-rectimage.width*0.7*scale, translateX), rectimage.width*0.7*scale);
+    translateY = Math.min(Math.max(-rectimage.height*0.7*scale, translateY), rectimage.height*0.7*scale);
     image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
 }
