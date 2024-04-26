@@ -64,7 +64,7 @@ function zoom(e) {
 }   
 
 function updateImageTransform() {
-    translateX = Math.min(Math.max(-rectimage.width*0.5*scale, translateX), rectimage.width*0.5*scale);   //ensures that the map image does not go pass the border 
+    translateX = Math.min(Math.max(-rectimage.width*0.5*scale, translateX), rectimage.width*0.5*scale);
     translateY = Math.min(Math.max(-rectimage.height*0.5*scale, translateY), rectimage.height*0.5*scale);
     image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
 }
