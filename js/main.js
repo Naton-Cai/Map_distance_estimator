@@ -55,7 +55,7 @@ function zoom(e) {
     //console.log(oldscale, scale, rectimage.width, rectimage.height)
     if (scale != oldscale)
     { 
-        translateX += e.deltaY * -0.001*translateX; // moves the image so that the focus point of the image is at the same postion after zooming in and out
+        translateX += e.deltaY * -0.001*translateX; //moves the image so that the focus point of the image is at the same postion after zooming in and out
         translateY += e.deltaY * -0.001*translateY;
     }
 
@@ -64,7 +64,7 @@ function zoom(e) {
 }   
 
 function updateImageTransform() {
-    translateX = Math.min(Math.max(-rectimage.width*0.5*scale, translateX), rectimage.width*0.5*scale);
+    translateX = Math.min(Math.max(-rectimage.width*0.5*scale, translateX), rectimage.width*0.5*scale);   //ensures that the map image does not go pass the border 
     translateY = Math.min(Math.max(-rectimage.height*0.5*scale, translateY), rectimage.height*0.5*scale);
     image.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
 }
