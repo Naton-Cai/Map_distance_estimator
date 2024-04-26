@@ -55,7 +55,7 @@ function zoom(e) {
     //console.log(oldscale, scale, rectimage.width, rectimage.height)
     if (scale != oldscale)
     { 
-        translateX += e.deltaY * -0.001*translateX; //moves the image so that the focus point of the image is at the same postion after zooming in and out
+        translateX += e.deltaY * -0.001*translateX; // moves the image so that the focus point of the image is at the same postion after zooming in and out
         translateY += e.deltaY * -0.001*translateY;
     }
 
