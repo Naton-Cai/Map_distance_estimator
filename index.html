@@ -14,15 +14,33 @@
         
     <div class="map" id="map-container">
         
+        
         <div class = "image" id="image-container">
             <img src="images/map_profile.png" id="map-pic">
-        </div>
+    </div>
+    
+    <div class = "control_panel">
+        <h1>Control Panel</h1>
+        <label onclick="openMenu()">Open Control Panel</label>
+        <label for="input-file">Upload Map</label>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+        <label for="map-scale">Change Scale</label>
+        <label for="create-waypoint"><img src="images/icons/waypointbordered.svg" width="24" height="24">Add Waypoint</label> 
+        <!-- How are we actually doing waypoints? I imagine the way to do it would be to 
+        have it pull up a menu when you right click, where you can choose to add, move, or remove a waypoint.
+        Don't know how that'd be implemented though.-->
 
-        <div class = "control_panel">
-            <h1>Control Panel</h1>
-            <label for="input-file">Upload Map</label>
-            <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
-        </div>
+        
+    </div>
+    <!-- THis is broken can it be fixed?
+    <div class="slide_menu" id="slidey_menu">
+        <label for="close-menu">Close</label>
+        <h1>Control Panel</h1>
+        <label for="input-file">Upload Map</label>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+        <label for="map-scale">Change Scale</label>
+        <label for="create-waypoint"><img src="images/icons/waypointbordered.svg" width="24" height="24">Add Waypoint</label> 
+
     </div>
     -->
     <script src="js/main.js">

@@ -1,4 +1,4 @@
-const mapmapimage = document.getElementById('image-container');
+const mapimage = document.getElementById('image-container');
 const container = document.getElementById('map-container');
 const allwaypoints = document.getElementsByClassName('waypoint')
 
@@ -22,7 +22,7 @@ document.getElementById('map-pic').setAttribute('draggable', false);
 
 inputFile.onchange = function(){
     profilePic.src = URL.createObjectURL(inputFile.files[0])
-    rectimage = mapimage .getBoundingClientRect()
+    rectimage = mapimage.getBoundingClientRect()
 }
 
 function mouseDownControl(e){
@@ -113,44 +113,32 @@ function spawnWaypoint(e){
     console.log("spawn")
     console.log("spawn")
     var rect = mapimage.getBoundingClientRect();
-    var x = e.clientX - rect.left; // x position within the image element
-    var y = e.clientY - rect.top;  // y position within the image element
+    console.log(e.clientX, e.clientY)
+    var x = e.clientX-rect.left;  //x position within the image element
+    var y = e.clientY-rect.top;  //y position within the image element
 
     var img = document.createElement("img");
     img.src = "images/waypoint75.png";
     img.id = "waypoint" + 1;
-    
+
 
     img.classList.add("waypoint"); 
     img.style.position = 'absolute'; // Set position to absolute to position the waypoint correctly
-   // img.style.left = x + 'px'; // Set left position
-    // img.style.top = y  + 'px';  // Set top position
     img.style.transformOrigin = 'center center'; // Set the transform origin to center
-    img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+
+    img.style.left = x+'px'; // Set left position relative to the container
+    img.style.top = y+'px'; // Set top position relative to the container
+    img.style.scale = 0.03
     img.style.pointerEvents = 'none'; // Make the waypoint image non-interactable to prevent interference with dragging
 
-    container.appendChild(img);
+    mapimage.appendChild(img);
     
     wayPointIndex++; // Increment the waypoint index;
     wayPointIndex++; // Increment the waypoint index;
 }
 
-function updateImageTransform() {
+function updateImageTransform(e) {
     translateX = Math.min(Math.max(-rectimage.width*0.5*scale, translateX), rectimage.width*0.5*scale);   //ensures that the map image does not go pass the border 
     translateY = Math.min(Math.max(-rectimage.height*0.5*scale, translateY), rectimage.height*0.5*scale);
     mapimage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-
-    let waypoints = document.querySelectorAll('.waypoint');
-    waypoints.forEach(waypoint => {
-        var waypointRect = waypoint.getBoundingClientRect();
-        var imagerect = mapimage.getBoundingClientRect();
-        /*
-        var offsetX = (waypointRect.left - imagerect.left) ;
-        var offsetY = (waypointRect.top - imagerect.top);
-        console.log("Waypoint offset from mapimage:", offsetX, offsetY);
-        waypoint.style.transform = `translate(${translateX-offsetX}px, ${translateY-offsetY}px) scale(${scale})`;
-        */
-       console.log(waypointRect.left, imagerect.left)
-    });
-
 }
