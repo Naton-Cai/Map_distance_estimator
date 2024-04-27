@@ -102,28 +102,28 @@ function zoom(e) {
 function spawnWaypoint(e){
     e.preventDefault();
     console.log("spawn")
+
     var rect = mapimage.getBoundingClientRect();
-    console.log(e.clientX, e.clientY)
-    var x = e.clientX-rect.left;  //x position within the image element
-    var y = e.clientY-rect.top;  //y position within the image element
+
+    var x = e.clientX - rect.left;  // x position relative to the map container
+    var y = e.clientY - rect.top;   // y position relative to the map container
 
     var img = document.createElement("img");
     img.src = "images/waypoint75.png";
-    img.id = "waypoint" + 1;
-
+    img.id = "waypoint" + wayPointIndex; // Use wayPointIndex to ensure unique IDs for each waypoint
 
     img.classList.add("waypoint"); 
-    img.style.position = 'absolute'; // Set position to absolute to position the waypoint correctly
-    img.style.transformOrigin = 'center center'; // Set the transform origin to center
-
-    img.style.left = x+'px'; // Set left position relative to the container
-    img.style.top = y+'px'; // Set top position relative to the container
-    img.style.scale = 0.03
-    img.style.pointerEvents = 'none'; // Make the waypoint image non-interactable to prevent interference with dragging
+    img.style.position = 'absolute'; 
+    img.style.transformOrigin = 'center center'; 
+    img.style.width = '18px'; // Set the width of the waypoint image
+    img.style.height = '18px'; // Set the height of the waypoint image
+    img.style.left = (x/scale - 9) + 'px'; // Adjust the left position to center the image
+    img.style.top = (y/scale - 9) + 'px'; // Adjust the top position to center the image
+    img.style.pointerEvents = 'none'; 
 
     mapimage.appendChild(img);
     
-    wayPointIndex++; // Increment the waypoint index;
+    wayPointIndex++;  
 }
 
 function updateImageTransform(e) {
