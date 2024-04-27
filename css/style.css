@@ -32,7 +32,7 @@ body {
     text-align: center;
     color: #111;
     border-radius: 16px;
-    z-index: 10;
+    z-index: 2;
 }
 
 .slide_menu{
@@ -81,11 +81,18 @@ label{
 .image{
     min-width: 100%;
     height: auto;
-    background: rgb(0, 0, 0);
+    background: rgb(195, 186, 186);
     text-align: center;
     color: #333;
     z-index: 0;
     
+}
+
+.waypoint{
+    width: '10px';
+    height: '10px';
+    z-index: 1;
+    position:absolute;  
 }
 
 .image h1{
@@ -94,6 +101,7 @@ label{
 }
 
 .image img{
+    position: relative;
     width: 100%;
     height: auto;
     cursor: grab;
