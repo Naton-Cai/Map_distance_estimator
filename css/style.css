@@ -35,6 +35,35 @@ body {
     z-index: 10;
 }
 
+.slide_menu{
+    position: absolute;
+    width: 5%;
+    height: fit-content;
+    text-align: center;
+    background: rgba(188, 188, 188, 0.50);
+    backdrop-filter: blur(4px);
+    text-align: center;
+    color: #111;
+    border-radius: 16px;
+    z-index: 20;
+    overflow-x: hidden;
+    transition: 0.25s;
+}
+
+.slide_buttons{
+    display: block;
+    width: 50%;
+    height: fit-content;
+    background: light-dark(#e3362c, #C8A2C8);
+    color: light-dark(#fff, #000);
+    text-align: center;
+    padding: 12px;
+    
+    margin: 9px auto;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
 label{
     display: block;
     width: 50%;

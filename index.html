@@ -20,15 +20,25 @@
     
     <div class = "control_panel">
         <h1>Control Panel</h1>
+        <label onclick="openMenu()">Open Control Panel</label>
         <label for="input-file">Upload Map</label>
         <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
         <label for="map-scale">Change Scale</label>
-        <label for="create-waypoint"><img src="images/icons/waypoint.svg" width="24" height="24">Add Waypoint</label> 
+        <label for="create-waypoint"><img src="images/icons/waypointbordered.svg" width="24" height="24">Add Waypoint</label> 
         <!-- How are we actually doing waypoints? I imagine the way to do it would be to 
         have it pull up a menu when you right click, where you can choose to add, move, or remove a waypoint.
         Don't know how that'd be implemented though.-->
 
         
+    </div>
+    <div class="slide_menu" id="slidey_menu">
+        <label for="close-menu">Close</label>
+        <h1>Control Panel</h1>
+        <label for="input-file">Upload Map</label>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+        <label for="map-scale">Change Scale</label>
+        <label for="create-waypoint"><img src="images/icons/waypointbordered.svg" width="24" height="24">Add Waypoint</label> 
+
     </div>
     <script src="js/main.js">
     </script>
@@ -36,16 +46,17 @@
     <script>
         let profilePic = document.getElementById("map-pic");
         let inputFile = document.getElementById("input-file");
-        let openMenu = document.getElementById("open-controlpanel");
+        let closeMenu = document.getElementById("close-menu");
         let createWaypoint = document.getElementById("create-waypoint");
 
         inputFile.onchange = function(){
             profilePic.src = URL.createObjectURL(inputFile.files[0])
         }
-        openMenu.onchange = function() {
+        function openMenu() {
+            document.getElementById("slidey_menu").style.width = "250px";
+        }
             // put a function in me to open the slidey menu version of the control panel or delete if 
             // current control panel is ultimately chosen.
-        }
 
         
     </script>
