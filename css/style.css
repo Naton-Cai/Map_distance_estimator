@@ -28,17 +28,24 @@
     text-align: left;
     color: #333;
     border-radius: 16px;
-    z-index: 10;
+    z-index: 2;
 }
 
 .image{
     min-width: 100%;
     height: auto;
-    background: rgb(0, 0, 0);
+    background: rgb(195, 186, 186);
     text-align: center;
     color: #333;
     z-index: 0;
     
+}
+
+.waypoint{
+    width: '50px';
+    height: '50px';
+    z-index: 1;
+    position:absolute;  
 }
 
 .image h1{
