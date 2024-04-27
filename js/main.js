@@ -1,7 +1,7 @@
 const mapimage = document.getElementById('image-container');
 const container = document.getElementById('map-container');
 
-let rectimage = mapimage .getBoundingClientRect()
+let rectimage = mapimage.getBoundingClientRect()
 let isDragging = false;
 let startX, startY;
 let translateX = 0, translateY = 0;
@@ -58,8 +58,10 @@ function mouseUpControl(e){
 }
 
 function statuscheck() {
-    console.log(translateX, translateY)
-    //console.log((e.clientX) + 'px', (e.clientY) + 'px')
+    let waypoints = document.querySelectorAll('.waypoint')
+    waypoints.forEach(waypoint => {
+        console.log(waypoint.id)
+    });
 }
 
 function startDrag(e) {
@@ -109,10 +111,11 @@ function spawnWaypoint(e){
     var y = e.clientY - rect.top;   // y position relative to the map container
 
     var img = document.createElement("img");
-    img.src = "images/waypoint75.png";
+    img.src = "images/icons/waypointbordered.svg";
     img.id = "waypoint" + wayPointIndex; // Use wayPointIndex to ensure unique IDs for each waypoint
 
     img.classList.add("waypoint"); 
+    img.id = "waypoint"+wayPointIndex
     img.style.position = 'absolute'; 
     img.style.transformOrigin = 'center center'; 
     img.style.width = '18px'; // Set the width of the waypoint image
