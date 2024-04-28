@@ -13,21 +13,18 @@ let wayPointIndex = 0;
 
 mapimage.addEventListener('mousedown',  mouseDownControl);
 document.addEventListener('mouseup', mouseUpControl);
-
 mapimage.addEventListener('mousemove', drag);
 mapimage.addEventListener('wheel', zoom);
 mapimage.addEventListener('contextmenu', spawnWaypointMouse);
 document.addEventListener('keyup', statuscheck);
 document.getElementById('map-pic').setAttribute('draggable', false);
 
+
 inputFile.onchange = function(){
     profilePic.src = URL.createObjectURL(inputFile.files[0])
     rectimage = mapimage.getBoundingClientRect()
 }
 
-function test(e){
-    console.log("yo")
-}
 
 function mouseDownControl(e){
     switch (e.button) {
@@ -74,7 +71,26 @@ function mouseUpControl(e){
 function statuscheck(e) {
     e.preventDefault();
     if (e.code === 'Space') {
-        return;
+        var waypointx = null;
+        var waypointy = null;
+        var length = 0;
+
+        let waypoints = document.querySelectorAll('.waypoint')
+        waypoints.forEach(waypoint => {
+            var rect = waypoint.getBoundingClientRect();
+            var parentRect = mapimage.getBoundingClientRect();
+            var waypointParentX = rect.left - parentRect.left;
+            var waypointParentY = rect.top - parentRect.top;
+            
+            if (waypointx != null && waypointy != null) {
+                length += Math.sqrt((waypointx-waypointParentX)**2 + (waypointy-waypointParentY)**2)
+            }
+            waypointx = waypointParentX;
+            waypointy = waypointParentY;
+    
+        });
+
+        console.log(length)
     }
 }
 
@@ -154,6 +170,8 @@ function spawnWaypointMouse(e){
     var rect = mapimage.getBoundingClientRect();
     spawnWaypoint((e.clientX - rect.left)/scale - 9,(e.clientY - rect.top)/scale - 9)
     generate_path()
+
+    updateImageTransform(e);
 }
 
 function spawnWaypoint(x,y){
@@ -181,7 +199,6 @@ function spawnWaypoint(x,y){
 
 
 function updateImageTransform(e) {
-    console.log(e.target.x, translateX)
     translateX = Math.min(Math.max(-rectimage.width*0.5*scale, translateX), rectimage.width*0.5*scale);   //ensures that the map image does not go pass the border 
     translateY = Math.min(Math.max(-rectimage.height*0.5*scale, translateY), rectimage.height*0.5*scale);
     mapimage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
