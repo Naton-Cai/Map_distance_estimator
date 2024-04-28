@@ -21,6 +21,27 @@ body {
     display: flex;
 }
 
+.mappic{
+    pointer-Events: none;
+}
+
+.linecontainer{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    pointer-Events: none;
+}
+.line{
+    z-index: 10;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-Events: none;
+}
+
+
+
 .control_panel{
     position: absolute;
     width: 15%;

@@ -1,9 +1,10 @@
 const mapimage = document.getElementById('image-container');
 const container = document.getElementById('map-container');
+const allwaypoints = document.getElementsByClassName('waypoint')
 
 let rectimage = mapimage.getBoundingClientRect()
 let isDragging = false;
-let startX, startY;
+let startX = 0, startY = 0  ;
 let translateX = 0, translateY = 0;
 let scale = 1;
 let profilePic = document.getElementById("map-pic");
@@ -12,9 +13,10 @@ let wayPointIndex = 0;
 
 mapimage.addEventListener('mousedown',  mouseDownControl);
 document.addEventListener('mouseup', mouseUpControl);
+
 mapimage.addEventListener('mousemove', drag);
 mapimage.addEventListener('wheel', zoom);
-mapimage.addEventListener('contextmenu', spawnWaypoint);
+mapimage.addEventListener('contextmenu', spawnWaypointMouse);
 document.addEventListener('keyup', statuscheck);
 document.getElementById('map-pic').setAttribute('draggable', false);
 
@@ -23,10 +25,22 @@ inputFile.onchange = function(){
     rectimage = mapimage.getBoundingClientRect()
 }
 
+function test(e){
+    console.log("yo")
+}
+
 function mouseDownControl(e){
     switch (e.button) {
         case 0:
-            startDrag(e)   
+            if (e.target == mapimage){
+                startDrag(e) 
+            }
+
+            if (e.target.classList == "waypoint"){
+                return
+            }
+
+            console.log(e.target.classList)
             //console.log("Left button clicked.");
             break;
         case 1:
@@ -57,10 +71,44 @@ function mouseUpControl(e){
       }    
 }
 
-function statuscheck() {
+function statuscheck(e) {
+    e.preventDefault();
+    if (e.code === 'Space') {
+        return;
+    }
+}
+
+function generate_path(){
+    var c=document.getElementById("myCanvas");//document.createElement("canvas");
+    c.style.width ='100%';
+    c.style.height='100%';
+    c.width  = c.offsetWidth;
+    c.height = c.offsetHeight;
+    c.style.pointerEvents = 'none'; 
+
+    var ctx=c.getContext("2d"); 
+
+    var waypointx = null
+    var waypointy = null
+
     let waypoints = document.querySelectorAll('.waypoint')
     waypoints.forEach(waypoint => {
-        console.log(waypoint.id)
+        var rect = waypoint.getBoundingClientRect();
+        var parentRect = mapimage.getBoundingClientRect();
+        var waypointParentX = rect.left - parentRect.left;
+        var waypointParentY = rect.top - parentRect.top;
+        
+        if (waypointx != null && waypointy != null) {
+            ctx.beginPath();
+            ctx.lineWidth = "3";
+            ctx.strokeStyle = "red";
+            ctx.moveTo(waypointx/scale+9, waypointy/scale+9);
+            ctx.lineTo(waypointParentX/scale+9, waypointParentY/scale+9);
+            ctx.stroke();
+        }
+        waypointx = waypointParentX;
+        waypointy = waypointParentY;
+
     });
 }
 
@@ -74,7 +122,7 @@ function startDrag(e) {
 
 function endDrag() {
     isDragging = false;
-    image.style.cursor = 'grab';
+    mapimage.style.cursor = 'grab';
 }
 
 function drag(e) {
@@ -101,14 +149,15 @@ function zoom(e) {
 
 }   
 
-function spawnWaypoint(e){
+function spawnWaypointMouse(e){
     e.preventDefault();
-    console.log("spawn")
-
     var rect = mapimage.getBoundingClientRect();
+    spawnWaypoint((e.clientX - rect.left)/scale - 9,(e.clientY - rect.top)/scale - 9)
+    generate_path()
+}
 
-    var x = e.clientX - rect.left;  // x position relative to the map container
-    var y = e.clientY - rect.top;   // y position relative to the map container
+function spawnWaypoint(x,y){
+    console.log("spawn")
 
     var img = document.createElement("img");
     img.src = "images/icons/waypointbordered.svg";
@@ -120,16 +169,19 @@ function spawnWaypoint(e){
     img.style.transformOrigin = 'center center'; 
     img.style.width = '18px'; // Set the width of the waypoint image
     img.style.height = '18px'; // Set the height of the waypoint image
-    img.style.left = (x/scale - 9) + 'px'; // Adjust the left position to center the image
-    img.style.top = (y/scale - 9) + 'px'; // Adjust the top position to center the image
-    img.style.pointerEvents = 'none'; 
+    img.style.left = (x) + 'px'; // Adjust the left position to center the image
+    img.style.top = (y) + 'px'; // Adjust the top position to center the image
+
 
     mapimage.appendChild(img);
     
     wayPointIndex++;  
 }
 
+
+
 function updateImageTransform(e) {
+    console.log(e.target.x, translateX)
     translateX = Math.min(Math.max(-rectimage.width*0.5*scale, translateX), rectimage.width*0.5*scale);   //ensures that the map image does not go pass the border 
     translateY = Math.min(Math.max(-rectimage.height*0.5*scale, translateY), rectimage.height*0.5*scale);
     mapimage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
