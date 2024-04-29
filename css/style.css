@@ -96,13 +96,12 @@ label{
     
     margin: 9px auto;
     border-radius: 16px;
-    z-index: 2;
+    cursor: pointer;
 }
 
 .image{
     min-width: 100%;
     height: auto;
-    background: rgb(195, 186, 186);
     background: rgb(195, 186, 186);
     text-align: center;
     color: #333;
