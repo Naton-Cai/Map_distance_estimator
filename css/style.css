@@ -14,11 +14,11 @@ body {
 }
 
 .map{
-    width: 100%;
+    width: 75%;
     height: 100%;
     background:#000000;
     overflow: hidden; 
-    display: flex;
+    float: left;
 }
 
 .mappic{
@@ -43,7 +43,7 @@ body {
 
 
 .control_panel{
-    position: absolute;
+    
     width: 15%;
     height: fit-content;
     text-align: center;
@@ -54,6 +54,7 @@ body {
     color: #111;
     border-radius: 16px;
     z-index: 2;
+    float: left;
 }
 
 .slide_menu{
@@ -79,7 +80,6 @@ body {
     color: light-dark(#fff, #000);
     text-align: center;
     padding: 12px;
-    
     margin: 9px auto;
     border-radius: 16px;
     cursor: pointer;
