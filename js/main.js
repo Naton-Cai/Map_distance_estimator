@@ -23,6 +23,10 @@ document.getElementById('map-pic').setAttribute('draggable', false);
 inputFile.onchange = function(){
     profilePic.src = URL.createObjectURL(inputFile.files[0])
     rectimage = mapimage.getBoundingClientRect()
+    rectimage.height = rectimage.height/scale
+    rectimage.width = rectimage.width/scale
+    generate_path();
+    updateImageTransform();
     //generate_path()
     //updateImageTransform()
     
@@ -32,8 +36,8 @@ onresize = (event) => {
     rectimage = mapimage.getBoundingClientRect()
     generate_path();
     updateImageTransform();
-    
-
+    rectimage.height = rectimage.height/scale
+    rectimage.width = rectimage.width/scale
 };
 
 function mouseDownControl(e){
@@ -104,7 +108,7 @@ function statuscheck(e) {
     }
 }
 
-//drawn the lines between waypoints
+//drawn the lines between code
 function generate_path(){
     var c=document.getElementById("myCanvas");//document.createElement("canvas");
     c.style.width ='100%';
