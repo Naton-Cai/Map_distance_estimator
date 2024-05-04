@@ -110,8 +110,8 @@ label{
 }
 
 .waypoint{
-    width: '10px';
-    height: '10px';
+    width: 10px;
+    height: auto;
     z-index: 1;
     position:absolute;  
 }
